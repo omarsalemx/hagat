@@ -8,12 +8,31 @@
             background-color: #121212;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
         .logo-container {
             width: 500px;
             height: auto;
+            margin-bottom: 20px; /* Space between logo and button */
+        }
+        .contact-button {
+            padding: 10px 20px;
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Roboto'; 
+            font-size: 15px; /
+            font-weight: bold;
+            letter-spacing: 1px; 
+            text-transform: uppercase;
+            border-radius: 0;
+        }
+        .contact-button:hover {
+            background-color: #373737;
         }
     </style>
     <!-- Favicon link -->
@@ -25,5 +44,7 @@
     <div class="logo-container">
         <img src="https://lh3.googleusercontent.com/drive-viewer/AKGpihaA35IB7e9mPhDepCdnaDnQjW9CXgTheOY-SfBl4koKvBAQMMQxNkhM_UFPO7y_5ApKo4FaM9iR-gLj8lanMdnASpIzG7Xrpjc=s1600-rw-v1" alt="Hagat Logo" style="width:100%;">
     </div>
+    <!-- Contact Button -->
+    <button class="contact-button" onclick="window.open('mailto:os@hagat.xyz', '_blank');">CONTACT</button>
 </body>
 </html>
