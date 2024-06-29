@@ -91,6 +91,7 @@
             font-size: 14px;
             font-weight: bold;
             letter-spacing: 1px;
+            color: var(--button-bg); /* Changed to match button color */
         }
 
         .falling-letter {
@@ -154,9 +155,9 @@
                 const progress = elapsed / (duration * 1000);
 
                 if (progress < 1) {
-                    const easeProgress = 1 - Math.pow(1 - progress, 5); // Ease out quintic for even slower end
+                    const easeProgress = 1 - Math.pow(1 - progress, 3); // Changed to cubic easing for smoother fall
                     const yPosition = easeProgress * window.innerHeight;
-                    const xPosition = parseFloat(letter.style.left) + horizontalMovement * Math.sin(progress * Math.PI); // Sinusoidal horizontal movement
+                    const xPosition = parseFloat(letter.style.left) + horizontalMovement * Math.sin(progress * Math.PI * 2); // Smoother horizontal movement
                     letter.style.transform = `translate(${xPosition}px, ${yPosition}px)`;
 
                     // Start fading out when the letter reaches the fade start point
