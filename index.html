@@ -65,6 +65,7 @@
             font-size: 14px;
             font-weight: bold;
             letter-spacing: 1px;
+            text-transform: uppercase;
             border-radius: 4px;
             transition: all 0.3s ease;
             z-index: 1;
@@ -90,7 +91,6 @@
             font-size: 14px;
             font-weight: bold;
             letter-spacing: 1px;
-            text-transform: uppercase;
         }
 
         .falling-letter {
@@ -116,11 +116,11 @@
     </div>
 
     <script>
-        const letters = ['x', 'y', 'z'];
+        const letters = ['x', 'y', 'z', 'o', 's'];
         const fallingLetters = [];
         const logoContainer = document.getElementById('logo-container');
         let logoRect = logoContainer.getBoundingClientRect();
-        const fadeStartOffset = 150; // Start fading 150px above the logo
+        const fadeStartOffset = 100; // Start fading 100px above the logo
         let letterIndex = 0;
         let sequenceCount = 0;
 
@@ -145,7 +145,7 @@
             letter.style.opacity = Math.random() * 0.5 + 0.5; // Random opacity between 0.5 and 1
             document.body.appendChild(letter);
 
-            const duration = Math.random() * 60 + 60; // 60-120 seconds
+            const duration = Math.random() * 25 + 25; // 25-50 seconds
             const startTime = performance.now();
             const horizontalMovement = (Math.random() - 0.5) * 150; // Random horizontal movement -75px to 75px
 
