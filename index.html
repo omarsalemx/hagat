@@ -1,52 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hagat</title>
+    <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/drive-viewer/AKGpihbLpBFiCMaHL1lSmKncz9vrp1E75TJbzAiviSUwNPuV3C9oSQxfxGez6Iv_jvi__0mJHPcoyEWXU0xfdLVQKWUH_cABDWKXbmc=s2560">
     <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #f0f0f0;
+            --button-bg: #373737;
+            --button-hover-bg: #f0f0f0;
+            --button-hover-text: #121212;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            background-color: #121212;
+            background-color: var(--bg-color);
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
         }
+
         .logo-container {
-            max-width: 90%; /* Adjust the maximum width for responsiveness */
+            max-width: 90%;
             height: auto;
-            margin-bottom: 20px; /* Space between logo and button */
+            margin-bottom: 20px;
+            z-index: 1;
         }
+
+        .logo-container img {
+            width: 100%;
+            height: auto;
+        }
+
         .contact-button {
             padding: 10px 20px;
-            background-color: #373737;
-            color: #f0f0f0;
+            background-color: var(--button-bg);
+            color: var(--text-color);
             text-decoration: none;
             border: none;
             cursor: pointer;
-            font-family: 'Arial';
-            font-size: 14px; /* Increase font size for better readability on mobile */
+            font-size: 14px;
             font-weight: bold;
             letter-spacing: 1px;
             text-transform: uppercase;
-            border-radius: 0;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            z-index: 1;
         }
-        .contact-button:hover {
-            background-color: #f0f0f0;
-            color: #121212;
+
+        .contact-button:hover, .contact-button:focus {
+            background-color: var(--button-hover-bg);
+            color: var(--button-hover-text);
+            outline: none;
+        }
+
+        .falling-letter {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
         }
     </style>
-    <!-- Favicon link -->
-    <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/drive-viewer/AKGpihbLpBFiCMaHL1lSmKncz9vrp1E75TJbzAiviSUwNPuV3C9oSQxfxGez6Iv_jvi__0mJHPcoyEWXU0xfdLVQKWUH_cABDWKXbmc=s2560">
-    <!-- Title -->
-    <title>Hagat</title>
 </head>
 <body>
     <div class="logo-container">
-        <img src="https://lh3.googleusercontent.com/drive-viewer/AKGpihZULwrLyNh1d5nPig6HnBTepRm0Ncgup-txvW4KSloZt9FX3-xQq_ZhGeiQfT_eRa-6BDz4ytFPpC41TbR1yJR3Oq4iBkFbWjY=s1600-rw-v1" alt="Hagat Logo" style="width:100%;">
+        <img src="https://lh3.googleusercontent.com/drive-viewer/AKGpihZULwrLyNh1d5nPig6HnBTepRm0Ncgup-txvW4KSloZt9FX3-xQq_ZhGeiQfT_eRa-6BDz4ytFPpC41TbR1yJR3Oq4iBkFbWjY=s1600-rw-v1" alt="Hagat Logo">
     </div>
-    <!-- Contact Button -->
-    <button class="contact-button" onclick="window.open('mailto:os@hagat.xyz', '_blank');">CONTACT</button>
+    <a href="mailto:os@hagat.xyz" class="contact-button">Contact</a>
+
+    <script>
+        function createFallingLetter() {
+            const letter = document.createElement('div');
+            letter.classList.add('falling-letter');
+            letter.innerText = ['x', 'y', 'z'][Math.floor(Math.random() * 3)];
+            letter.style.left = `${Math.random() * 100}vw`;
+            letter.style.top = '-20px';
+            letter.style.opacity = Math.random();
+            document.body.appendChild(letter);
+
+            const duration = Math.random() * 5 + 5; // 5-10 seconds
+            letter.animate(
+                [
+                    { transform: 'translateY(0vh)' },
+                    { transform: 'translateY(100vh)' }
+                ],
+                {
+                    duration: duration * 1000,
+                    easing: 'linear'
+                }
+            ).onfinish = () => {
+                letter.remove();
+            };
+        }
+
+        setInterval(createFallingLetter, 200);
+    </script>
 </body>
 </html>
