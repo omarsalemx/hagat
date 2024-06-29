@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hagat</title>
+    <meta name="description" content="Hagat - Omar Salem">
+    <meta name="keywords" content="Hagat, Omar Salem">
+    <title>Hagat - HOS</title>
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/drive-viewer/AKGpihbLpBFiCMaHL1lSmKncz9vrp1E75TJbzAiviSUwNPuV3C9oSQxfxGez6Iv_jvi__0mJHPcoyEWXU0xfdLVQKWUH_cABDWKXbmc=s2560">
     <style>
         :root {
@@ -18,6 +20,7 @@
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
+            color: var(--text-color);
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -25,6 +28,7 @@
             align-items: center;
             font-family: Arial, sans-serif;
             overflow: hidden;
+            transition: background-color 0.3s ease;
         }
 
         .logo-container {
@@ -32,14 +36,26 @@
             height: auto;
             margin-bottom: 20px;
             z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
         }
 
         .logo-container img {
             width: 100%;
             height: auto;
+            max-width: 400px;
         }
 
-        .contact-button {
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .contact-button, .about-button {
             padding: 10px 20px;
             background-color: var(--button-bg);
             color: var(--text-color);
@@ -55,10 +71,20 @@
             z-index: 1;
         }
 
-        .contact-button:hover, .contact-button:focus {
+        .contact-button:hover, .contact-button:focus,
+        .about-button:hover, .about-button:focus {
             background-color: var(--button-hover-bg);
             color: var(--button-hover-text);
             outline: none;
+            transform: translateY(-2px);
+        }
+
+        .about-section {
+            max-width: 600px;
+            text-align: center;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .falling-letter {
@@ -67,27 +93,39 @@
             font-size: 20px;
             user-select: none;
             pointer-events: none;
+            will-change: transform;
         }
     </style>
 </head>
 <body>
     <div class="logo-container">
-        <img src="https://lh3.googleusercontent.com/drive-viewer/AKGpihZULwrLyNh1d5nPig6HnBTepRm0Ncgup-txvW4KSloZt9FX3-xQq_ZhGeiQfT_eRa-6BDz4ytFPpC41TbR1yJR3Oq4iBkFbWjY=s1600-rw-v1" alt="Hagat Logo">
+        <img src="https://lh3.googleusercontent.com/drive-viewer/AKGpihZULwrLyNh1d5nPig6HnBTepRm0Ncgup-txvW4KSloZt9FX3-xQq_ZhGeiQfT_eRa-6BDz4ytFPpC41TbR1yJR3Oq4iBkFbWjY=s1600-rw-v1" alt="Hagat Logo" loading="lazy">
     </div>
-    <a href="mailto:os@hagat.xyz" class="contact-button">Contact</a>
+    <div class="button-container">
+        <a href="mailto:os@hagat.xyz" class="contact-button" aria-label="Contact us via email">Contact</a>
+        <button class="about-button" aria-expanded="false" aria-controls="about-section">About</button>
+    </div>
+    <div id="about-section" class="about-section" aria-hidden="true">
+        <p>Hagat Omar Salem</p>
+    </div>
 
     <script>
+        const letters = ['x', 'y', 'z'];
+        const fallingLetters = [];
+
         function createFallingLetter() {
+            if (fallingLetters.length >= 50) return; // Limit the number of letters
+
             const letter = document.createElement('div');
             letter.classList.add('falling-letter');
-            letter.innerText = ['x', 'y', 'z'][Math.floor(Math.random() * 3)];
+            letter.innerText = letters[Math.floor(Math.random() * letters.length)];
             letter.style.left = `${Math.random() * 100}vw`;
             letter.style.top = '-20px';
             letter.style.opacity = Math.random();
             document.body.appendChild(letter);
 
             const duration = Math.random() * 5 + 5; // 5-10 seconds
-            letter.animate(
+            const animation = letter.animate(
                 [
                     { transform: 'translateY(0vh)' },
                     { transform: 'translateY(100vh)' }
@@ -96,12 +134,31 @@
                     duration: duration * 1000,
                     easing: 'linear'
                 }
-            ).onfinish = () => {
+            );
+
+            animation.onfinish = () => {
                 letter.remove();
+                const index = fallingLetters.indexOf(letter);
+                if (index > -1) {
+                    fallingLetters.splice(index, 1);
+                }
             };
+
+            fallingLetters.push(letter);
         }
 
         setInterval(createFallingLetter, 200);
+
+        // About section toggle
+        const aboutButton = document.querySelector('.about-button');
+        const aboutSection = document.getElementById('about-section');
+
+        aboutButton.addEventListener('click', () => {
+            const isExpanded = aboutButton.getAttribute('aria-expanded') === 'true';
+            aboutButton.setAttribute('aria-expanded', !isExpanded);
+            aboutSection.style.opacity = isExpanded ? 0 : 1;
+            aboutSection.setAttribute('aria-hidden', isExpanded);
+        });
     </script>
 </body>
 </html>
