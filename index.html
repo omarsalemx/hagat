@@ -55,7 +55,7 @@
             margin-bottom: 20px;
         }
 
-        .contact-button, .about-button {
+        .contact-button, .about-button, .jobs-button {
             padding: 10px 20px;
             background-color: var(--button-bg);
             color: var(--text-color);
@@ -72,7 +72,8 @@
         }
 
         .contact-button:hover, .contact-button:focus,
-        .about-button:hover, .about-button:focus {
+        .about-button:hover, .about-button:focus,
+        .jobs-button:hover, .jobs-button:focus {
             background-color: var(--button-hover-bg);
             color: var(--button-hover-text);
             outline: none;
@@ -91,7 +92,7 @@
             font-size: 14px;
             font-weight: bold;
             letter-spacing: 1px;
-            color: var(--button-bg); /* Changed to match button color */
+            color: var(--button-bg);
         }
 
         .falling-letter {
@@ -110,7 +111,8 @@
     </div>
     <div class="button-container">
         <a href="mailto:os@hagat.xyz" class="contact-button" aria-label="Contact Hagat">Contact</a>
-        <button class="about-button" aria-expanded="false" aria-controls="About Hagat">About</button>
+        <button class="about-button" aria-expanded="false" aria-controls="about-section">About</button>
+        <a href="https://hagat.xyz/jobs" class="jobs-button" aria-label="Hagat Jobs">Jobs</a>
     </div>
     <div id="about-section" class="about-section" aria-hidden="true">
         <p class="about-text">Hagat Omar Salem</p>
