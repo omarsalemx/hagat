@@ -34,7 +34,6 @@
         .logo-container {
             max-width: 90%;
             height: auto;
-            margin-bottom: 20px;
             z-index: 1;
             transition: transform 0.3s ease;
         }
@@ -47,52 +46,6 @@
             width: 100%;
             height: auto;
             max-width: 400px;
-        }
-
-        .button-container {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .contact-button, .about-button, .jobs-button {
-            padding: 10px 20px;
-            background-color: var(--button-bg);
-            color: var(--text-color);
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            z-index: 1;
-        }
-
-        .contact-button:hover, .contact-button:focus,
-        .about-button:hover, .about-button:focus,
-        .jobs-button:hover, .jobs-button:focus {
-            background-color: var(--button-hover-bg);
-            color: var(--button-hover-text);
-            outline: none;
-            transform: translateY(-2px);
-        }
-
-        .about-section {
-            max-width: 600px;
-            text-align: center;
-            margin-top: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .about-text {
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            color: var(--button-bg);
         }
 
         .falling-letter {
@@ -108,14 +61,6 @@
 <body>
     <div class="logo-container" id="logo-container">
         <img src="https://raw.githubusercontent.com/omarsalemx/hagat/main/Hagat%20logo%20f0f0f0.png" alt="Hagat Logo" loading="lazy">
-    </div>
-    <div class="button-container">
-        <a href="mailto:os@hagat.xyz" class="contact-button" aria-label="Contact Hagat">Contact</a>
-        <button class="about-button" aria-expanded="false" aria-controls="about-section">About</button>
-        <a href="https://hagat.xyz/jobs" class="jobs-button" aria-label="Hagat Jobs">Jobs</a>
-    </div>
-    <div id="about-section" class="about-section" aria-hidden="true">
-        <p class="about-text">Hagat Omar Salem</p>
     </div>
 
     <script>
@@ -185,17 +130,6 @@
         // Start creating falling letters immediately and continue every second
         createFallingLetter();
         setInterval(createFallingLetter, 1000);
-
-        // About section toggle
-        const aboutButton = document.querySelector('.about-button');
-        const aboutSection = document.getElementById('about-section');
-
-        aboutButton.addEventListener('click', () => {
-            const isExpanded = aboutButton.getAttribute('aria-expanded') === 'true';
-            aboutButton.setAttribute('aria-expanded', !isExpanded);
-            aboutSection.style.opacity = isExpanded ? 0 : 1;
-            aboutSection.setAttribute('aria-hidden', isExpanded);
-        });
 
         // Recalculate logo position on window resize
         window.addEventListener('resize', () => {
