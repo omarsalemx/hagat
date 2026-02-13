@@ -47,94 +47,11 @@
             height: auto;
             max-width: 400px;
         }
-
-        .falling-letter {
-            position: fixed;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 20px;
-            user-select: none;
-            pointer-events: none;
-            will-change: transform, opacity;
-        }
     </style>
 </head>
 <body>
     <div class="logo-container" id="logo-container">
         <img src="https://raw.githubusercontent.com/omarsalemx/hagat/main/Hagat%20logo%20f0f0f0.png" alt="Hagat Logo" loading="lazy">
     </div>
-
-    <script>
-        const letters = ['x', 'y', 'z', 'o', 's'];
-        const fallingLetters = [];
-        const logoContainer = document.getElementById('logo-container');
-        let logoRect = logoContainer.getBoundingClientRect();
-        const fadeStartOffset = 100; // Start fading 100px above the logo
-        let letterIndex = 0;
-        let sequenceCount = 0;
-
-        function getNextLetter() {
-            if (sequenceCount < 3) {
-                let letter = letters[sequenceCount];
-                sequenceCount++;
-                return letter;
-            } else {
-                return letters[Math.floor(Math.random() * letters.length)];
-            }
-        }
-
-        function createFallingLetter() {
-            if (fallingLetters.length >= 20) return; // Limit the number of letters
-
-            const letter = document.createElement('div');
-            letter.classList.add('falling-letter');
-            letter.innerText = getNextLetter();
-            letter.style.left = `${Math.random() * 100}vw`;
-            letter.style.top = '-20px';
-            letter.style.opacity = Math.random() * 0.5 + 0.5; // Random opacity between 0.5 and 1
-            document.body.appendChild(letter);
-
-            const duration = Math.random() * 15 + 25; // 15-40 seconds
-            const startTime = performance.now();
-            const horizontalMovement = (Math.random() - 0.5) * 150; // Random horizontal movement -75px to 75px
-
-            function animateLetter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = elapsed / (duration * 1000);
-
-                if (progress < 1) {
-                    const easeProgress = 1 - Math.pow(1 - progress, 3); // Changed to cubic easing for smoother fall
-                    const yPosition = easeProgress * window.innerHeight;
-                    const xPosition = parseFloat(letter.style.left) + horizontalMovement * Math.sin(progress * Math.PI * 2); // Smoother horizontal movement
-                    letter.style.transform = `translate(${xPosition}px, ${yPosition}px)`;
-
-                    // Start fading out when the letter reaches the fade start point
-                    if (yPosition > logoRect.top - fadeStartOffset) {
-                        const fadeProgress = (yPosition - (logoRect.top - fadeStartOffset)) / (logoRect.height + fadeStartOffset);
-                        letter.style.opacity = Math.max(0, 1 - fadeProgress) * parseFloat(letter.style.opacity);
-                    }
-
-                    requestAnimationFrame(animateLetter);
-                } else {
-                    letter.remove();
-                    const index = fallingLetters.indexOf(letter);
-                    if (index > -1) {
-                        fallingLetters.splice(index, 1);
-                    }
-                }
-            }
-
-            requestAnimationFrame(animateLetter);
-            fallingLetters.push(letter);
-        }
-
-        // Start creating falling letters immediately and continue every second
-        createFallingLetter();
-        setInterval(createFallingLetter, 1000);
-
-        // Recalculate logo position on window resize
-        window.addEventListener('resize', () => {
-            logoRect = logoContainer.getBoundingClientRect();
-        });
-    </script>
 </body>
 </html>
