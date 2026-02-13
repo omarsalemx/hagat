@@ -360,7 +360,6 @@
 <body>
     <div class="container">
         <header>
-            <div class="wordmark">Hagat</div>
         </header>
 
         <main>
@@ -374,7 +373,7 @@
                 </p>
 
                 <div class="cta">
-                    <button class="contact-btn" onclick="openModal()">Get in Touch</button>
+                    <button class="contact-btn" onclick="openModal()">Contact</button>
                 </div>
             </div>
         </main>
@@ -388,11 +387,10 @@
     <div class="modal" id="contactModal" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal()">&times;</button>
-            <h2>Let's Connect</h2>
             <div class="contact-info">
                 <div class="contact-item">
                     <span class="contact-label">Email</span>
-                    <a href="mailto:os@hagat.xyz" class="contact-value">os@hagat.xyz</a>
+                    <a href="/cdn-cgi/l/email-protection#d8b0bdb4b4b798b0b9bfb9acf6bbb7b5" class="contact-value"><span class="__cf_email__" data-cfemail="1078757c7c7f5078717771643e737f7d">[email&#160;protected]</span></a>
                 </div>
                 <div class="contact-item">
                     <span class="contact-label">Phone</span>
@@ -406,7 +404,7 @@
         </div>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         function openModal() {
             const modal = document.getElementById('contactModal');
             modal.classList.add('active');
@@ -418,15 +416,3 @@
                 const modal = document.getElementById('contactModal');
                 modal.classList.remove('active');
                 document.body.style.overflow = '';
-            }
-        }
-
-        // Close on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-    </script>
-</body>
-</html>
